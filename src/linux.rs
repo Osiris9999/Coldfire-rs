@@ -1,9 +1,9 @@
-use std::process::{Command,Output};
+use std::process::{Command, Output, ExitStatus};
 use std::io::Error;
 fn killProcByPID(pid:i32) {
 	let p = pid.to_string();
 	let cmd = "kill -9".to_owned() + &p;
-	
+	let err = cmdOut(cmd);	
 }
 
 //fn info() -> String {
@@ -15,17 +15,9 @@ fn killProcByPID(pid:i32) {
 
 //}
 
-fn cmdOut(command: String)  -> (String, u32) {
-	let cmd = Command::new("bash").arg("-c").arg(command).output();
-	if cmd.status != 0 {
-		println!("Process exited with exit status {}", cmd.status);
-		} 
-
-//	let output = match cmd {
-//		Ok(T) => cmd,
-//		Err(error) => println!("Command exited with exitstatus {}", cmd.status)
-//		};	
+fn cmdOut(command: String)  -> (ExitStatus) {
+	let output = Command::new("bash").arg("-c").arg(command).status().expect("Failed to execute command");
+	 output
 	}
-
 
 fn main() {}
