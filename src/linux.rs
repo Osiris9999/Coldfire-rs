@@ -1,5 +1,7 @@
 use std::process::{Command, Output, ExitStatus};
 use std::io::Error;
+use nix::unistd::getuid;
+
 fn killProcByPID(pid:i32) {
 	let p = pid.to_string();
 	let cmd = "kill -9".to_owned() + &p;
@@ -15,9 +17,16 @@ fn killProcByPID(pid:i32) {
 
 //}
 
+fn isRoot()  {
+	let u = getuid();
+	
+
+	}
+
 fn cmdOut(command: String)  -> (ExitStatus) {
 	let output = Command::new("bash").arg("-c").arg(command).status().expect("Failed to execute command");
 	 output
 	}
+
 
 fn main() {}
