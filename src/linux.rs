@@ -17,8 +17,15 @@ fn killProcByPID(pid:i32) {
 
 //}
 
-fn isRoot()  {
-	let u = getuid();
+fn isRoot() -> String  {
+	 let u = getuid();
+         if u32::from(u) == 0 {
+                return "root".to_string()
+                }
+        else {
+                return "not root".to_string()
+                }
+
 	
 
 	}
