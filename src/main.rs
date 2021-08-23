@@ -28,6 +28,10 @@ fn RemoveNewlines(s: String) -> String {
         return re.to_string()
         }
 
+fn FullRemove(str: String, to_remove: String) -> String {
+        return str.replace(&to_remove, "" )
+	}
+
 
 
 fn main() {
