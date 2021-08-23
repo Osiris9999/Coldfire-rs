@@ -23,6 +23,13 @@ fn RandomInt(min: u32, max: u32) -> u32 {
 	return rng
 	}
 
+fn RemoveNewlines(s: String) -> String {
+        let re = s.replace("\n", " ");
+        return re.to_string()
+        }
+
+
+
 fn main() {
     println!("Hello, world!");
 }
