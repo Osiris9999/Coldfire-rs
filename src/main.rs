@@ -36,6 +36,15 @@ fn RandomSelectStr(list: Vec<String>) -> String {
         return s
 	}
 
+// RandomSelectInt returns an integer that was randomly selected from a list of vector of integers.
+fn RandomSelectInt(list: Vec<u32>) -> u32 {
+
+        let mut rng = rand::thread_rng();
+        let n = rng.gen_range(0..list.len());
+        let s = list[n].clone();
+        return s
+	}
+
 // RemoveNewLines removes possible newlines from a string.
 fn RemoveNewlines(s: String) -> String {
         let re = s.replace("\n", " ");
