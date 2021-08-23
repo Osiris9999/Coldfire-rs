@@ -23,6 +23,16 @@ fn RandomInt(min: u32, max: u32) -> u32 {
 	return rng
 	}
 
+fn RandomSelectStr(list: Vec<String>) -> String {
+
+        let mut rng = rand::thread_rng();
+        let n = rng.gen_range(0..list.len());
+        let s = list[n].clone();
+        return s
+}
+
+
+
 fn RemoveNewlines(s: String) -> String {
         let re = s.replace("\n", " ");
         return re.to_string()
