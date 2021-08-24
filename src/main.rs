@@ -1,4 +1,5 @@
 mod linux;
+use std::path::Path;
 use rand::Rng;
 
 // Revert returns a reversed string.
@@ -77,7 +78,10 @@ fn RandomString(n: usize) -> String {
 	return b
 	}
 
-
+// Exists checks if a given file is in the system.
+fn Exists(file: String) -> bool {
+        return Path::new(&file).exists()
+        }
 
 fn main() {
     
