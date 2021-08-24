@@ -56,6 +56,11 @@ fn FullRemove(str: String, to_remove: String) -> String {
         return str.replace(&to_remove, "" )
 	}
 
+// ContainsAny checks if a string exists within a vector of strings.
+fn ContainsAny(str: String, elements: Vec<String>) -> bool {
+	elements.contains(&str)
+	}
+
 
 
 fn main() {
