@@ -61,6 +61,22 @@ fn ContainsAny(str: String, elements: Vec<String>) -> bool {
 	elements.contains(&str)
 	}
 
+// RandomString randomly generates an alphabetic string of a given length.	
+fn RandomString(n: usize) -> String {
+	const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    	let  PASSWORD_LEN: usize = n;
+    	let mut rng = rand::thread_rng();
+
+    	let b: String = (0..PASSWORD_LEN)
+        		.map(|_| {
+            	let idx = rng.gen_range(0..CHARSET.len());
+            	CHARSET[idx] as char
+        		})
+        .collect();
+
+	return b
+	}
+
 
 
 fn main() {
