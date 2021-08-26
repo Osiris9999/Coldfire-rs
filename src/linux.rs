@@ -20,17 +20,17 @@ fn killProcByPID(pid:i32) {
 fn isRoot() -> String  {
 	 let u = getuid();
          if u32::from(u) == 0 {
-                return "root".to_string()
+                 "root".to_string()
                 }
         else {
-                return "not root".to_string()
+                 "not root".to_string()
                 }
 
 	
 
 	}
 
-fn cmdOut(command: String)  -> (ExitStatus) {
+fn cmdOut(command: String)  -> ExitStatus {
 	let output = Command::new("bash").arg("-c").arg(command).status().expect("Failed to execute command");
 	 output
 	}
