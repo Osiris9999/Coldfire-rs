@@ -23,6 +23,20 @@ fn IntToStr(i: u32) -> String {
 	 i.to_string()
 	}
 
+// SizeToBytes converts a human friendly string indicating size into a proper integer.
+fn SizeToBytes(size: &str) -> u128 {
+    let mut size = size.to_string();
+    let last_chara = size.chars().last().unwrap();
+    size.pop();
+    let i: u128 = size.parse().unwrap();
+    match last_chara {
+        'g' => i * 1024 * 1024 * 1024,
+        'm' => i * 1024 * 1024,
+        'k' => i * 1024,
+        _ => i,
+    }
+}
+
 // RandomInt returns an integer within a given range.
 fn RandomInt(min: u32, max: u32) -> u32 {
 	 rand::thread_rng().gen_range(min..max)
