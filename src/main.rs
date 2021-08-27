@@ -37,6 +37,21 @@ fn SizeToBytes(size: &str) -> u128 {
     }
 }
 
+// IntervalToSeconds converts a human friendly string indicating time into a proper integer.
+fn IntervalToSeconds(interval: &str) -> u128 {
+    let mut interval = interval.to_string();
+    let last_chara = interval.chars().last().unwrap();
+    interval.pop();
+    let i: u128 = interval.parse().unwrap();
+    match last_chara {
+        'd' => i * 24 * 3600,
+        'h' => i * 3600,
+        'm' => i * 60,
+        's' => i,
+        _ => i,
+    }
+}
+
 // RandomInt returns an integer within a given range.
 fn RandomInt(min: u32, max: u32) -> u32 {
 	 rand::thread_rng().gen_range(min..max)
