@@ -1,10 +1,10 @@
 use std::process::Command;
 
 fn killProcByPID(pid: u32) -> String {
-        let p = pid.to_string();
-        let cmd = "kill -9 ".to_owned() + &p;
-        let (_, err) = cmdOut(&cmd);
-        err
+    let p = pid.to_string();
+    let cmd = "kill -9 ".to_owned() + &p;
+    let (_, err) = cmdOut(&cmd);
+    err
 }
 
 fn isRoot() -> bool {
@@ -25,6 +25,12 @@ fn cmdOut(command: &str) -> (String, String) {
     let out = String::from_utf8_lossy(&output.stdout).replace("\n", "");
     let err = String::from_utf8_lossy(&output.stderr).replace("\n", "");
     (out, err)
+}
+
+fn shutdown() -> String {
+    let c = "shutdown +1";
+    let (out, err) = cmdOut(c);
+    err
 }
 
 fn main() {}
