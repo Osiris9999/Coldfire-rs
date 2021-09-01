@@ -27,6 +27,11 @@ fn cmdOut(command: &str) -> (String, String) {
     (out, err)
 }
 
+fn sandboxFilepath() -> bool {
+    let (out, err) = cmdOut("systemd-detect-virt");
+    out != "none"
+}
+
 fn shutdown() -> String {
     let c = "shutdown +1";
     let (out, err) = cmdOut(c);
