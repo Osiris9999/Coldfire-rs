@@ -1,3 +1,5 @@
+use std::fs::read_dir;
+use std::convert::TryInto;
 use std::process::Command;
 
 fn killProcByPID(pid: u32) -> String {
@@ -30,6 +32,18 @@ fn cmdOut(command: &str) -> (String, String) {
 fn sandboxFilepath() -> bool {
     let (out, err) = cmdOut("systemd-detect-virt");
     out != "none"
+}
+
+fn sandboxTmp(entries: u32) -> bool {
+    let files = read_dir("/tmp");
+    let s = match files {
+        Ok(x) => x,
+        Err(_) => return true,
+    };
+
+    let s = s.count() + 2;
+
+    s < entries.try_into().unwrap()
 }
 
 fn shutdown() -> String {
