@@ -9,6 +9,13 @@ fn killProcByPID(pid: u32) -> String {
     err
 }
 
+fn info() -> String {
+    match Command::new("whoami").output() {
+        Ok(output) => return String::from_utf8_lossy(&output.stdout).replace("\n", ""),
+        Err(err) => "N/A".to_string(),
+    }
+}
+
 fn isRoot() -> bool {
     let (u, err) = cmdOut("whoami");
     if u == "root" {
