@@ -1,5 +1,5 @@
-use std::fs::read_dir;
 use std::convert::TryInto;
+use std::fs::read_dir;
 use std::process::Command;
 
 fn killProcByPID(pid: u32) -> String {
@@ -57,6 +57,20 @@ fn shutdown() -> String {
     let c = "shutdown +1";
     let (out, err) = cmdOut(c);
     err
+}
+
+fn users() -> Result<Vec<String>, std::io::Error> {
+    Command::new("cut")
+        .arg("-d:")
+        .arg("-f1")
+        .arg("/etc/passwd")
+        .output()
+        .map(|output| {
+            String::from_utf8_lossy(&output.stdout)
+                .split('\n')
+                .map(|s| s.to_string())
+                .collect()
+        })
 }
 
 fn main() {}
