@@ -112,6 +112,11 @@ fn WriteFile(filename: &str, data: &str) -> Result<(), std::io::Error> {
     fs::write(filename, data)
 }
 
+// B64D decodes a given string encoded in Base64.
+fn B64D(s: &str) -> String {
+    String::from_utf8_lossy(&base64::decode(s).unwrap()).to_string()
+}
+
 // B64E encodes a string in Base64.
 fn B64E(s: &str) -> String {
     let b64 = base64::encode(s.as_bytes());
