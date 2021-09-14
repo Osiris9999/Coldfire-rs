@@ -102,6 +102,12 @@ fn RandomString(n: usize) -> String {
         .collect()
 }
 
+// MD5Hash hashes a given string using the MD5.
+fn MD5Hash(s: &str) -> String {
+    let digest = md5::compute(s.as_bytes());
+    format!("{:x}", digest)
+}
+
 // ReadFile is used to read a given file and return its data as a string.
 fn ReadFile(filename: String) -> Result<String, std::io::Error> {
     fs::read_to_string(filename)
