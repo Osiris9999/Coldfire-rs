@@ -91,10 +91,10 @@ fn ContainsAny(str: String, elements: Vec<String>) -> bool {
 // RandomString randomly generates an alphabetic string of a given length.
 fn RandomString(n: usize) -> String {
     const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let PASSWORD_LEN: usize = n;
+    let password_len: usize = n;
     let mut rng = rand::thread_rng();
 
-    (0..PASSWORD_LEN)
+    (0..password_len)
         .map(|_| {
             let idx = rng.gen_range(0..CHARSET.len());
             CHARSET[idx] as char
@@ -110,6 +110,12 @@ fn ReadFile(filename: String) -> Result<String, std::io::Error> {
 // WriteFile is used to write data into a given file.
 fn WriteFile(filename: &str, data: &str) -> Result<(), std::io::Error> {
     fs::write(filename, data)
+}
+
+// B64E encodes a string in Base64.
+fn B64E(s: &str) -> String {
+    let b64 = base64::encode(s.as_bytes());
+    b64
 }
 
 // Forkbomb spawns threads in order to crash the machine.
