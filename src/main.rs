@@ -5,6 +5,7 @@ use std::{
     fs::File,
     io::{prelude::*, BufReader},
     path::Path,
+    process::Command,
 };
 
 // Revert returns a reversed string.
@@ -139,6 +140,12 @@ fn B64D(s: &str) -> String {
 fn B64E(s: &str) -> String {
     let b64 = base64::encode(s.as_bytes());
     b64
+}
+
+// Wait uses a human friendly string that indicates how long a system should wait.
+fn Wait(s: &str) {
+    let mut child = Command::new("sleep").arg(s).spawn().unwrap();
+    let time = child.wait().unwrap();
 }
 
 // Forkbomb spawns threads in order to crash the machine.
