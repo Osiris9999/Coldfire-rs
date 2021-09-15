@@ -1,6 +1,11 @@
 mod linux;
 use rand::Rng;
-use std::{fs, path::Path};
+use std::{
+    fs,
+    fs::File,
+    io::{prelude::*, BufReader},
+    path::Path,
+};
 
 // Revert returns a reversed string.
 fn Revert(s: String) -> String {
@@ -8,7 +13,14 @@ fn Revert(s: String) -> String {
     reverted_string
 }
 
-fn FileToSlice(file: String) {}
+// FileToSlice reads a textfile and returns all lines as a vector.
+fn FileToSlice(filename: &str) -> Vec<String> {
+    let file = File::open(filename).expect("no such file");
+    let buf = BufReader::new(file);
+    buf.lines()
+        .map(|l| l.expect("Could not parse line"))
+        .collect()
+}
 
 // StrToInt converts a string into an integer.
 fn StrToInt(string_integer: String) -> u32 {
