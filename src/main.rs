@@ -167,4 +167,10 @@ fn Exists(file: String) -> bool {
     Path::new(&file).exists()
 }
 
+// CopyFile copies a file from one directory to another.
+fn CopyFile(src: &str, dst: &str) -> std::io::Result<()> {
+    fs::copy(src, dst)?;
+    Ok(())
+}
+
 fn main() {}
