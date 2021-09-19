@@ -3,7 +3,9 @@ use rand::Rng;
 use std::{
     env, fs,
     fs::File,
+    io,
     io::{prelude::*, BufReader},
+    net::UdpSocket,
     path::Path,
     process::Command,
 };
@@ -113,6 +115,13 @@ fn RandomString(n: usize) -> String {
             CHARSET[idx] as char
         })
         .collect()
+}
+
+// GetLocalIp is used to get the local Ip address of the machine.
+fn GetLocalIp() -> io::Result<std::net::SocketAddr> {
+    let socket = UdpSocket::bind(("0.0.0.0", 0))?;
+    socket.connect(("8.8.8.8", 80))?;
+    socket.local_addr()
 }
 
 // MD5Hash hashes a given string using the MD5.
