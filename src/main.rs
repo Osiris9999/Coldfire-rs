@@ -9,6 +9,14 @@ use std::{
     path::Path,
     process::Command,
 };
+use std::io::Read;
+use error_chain::error_chain;
+error_chain! {
+  foreign_links {
+    Io(std::io::Error);
+  HttpRequest(reqwest::Error);
+}
+}
 
 // Revert returns a reversed string.
 fn Revert(s: String) -> String {
@@ -124,6 +132,21 @@ fn GetLocalIp() -> io::Result<std::net::SocketAddr> {
     socket.local_addr()
 }
 
+// GetGlobalIp is used to return the global Ip address of the machine.
+fn GetGlobalIp() -> Result<String> {
+    let resolvers = vec![
+        "https://api.ipify.org?format=text",
+        "http://myexternalip.com/raw",
+        "http://ident.me",
+    ];
+    let url = RandomSelectStr(resolvers);
+    let mut res = reqwest::blocking::get(url)?;
+    let mut body = String::new();
+    res.read_to_string(&mut body)?;
+
+    Ok(body)
+}
+
 // MD5Hash hashes a given string using the MD5.
 fn MD5Hash(s: &str) -> String {
     let digest = md5::compute(s.as_bytes());
@@ -131,13 +154,13 @@ fn MD5Hash(s: &str) -> String {
 }
 
 // ReadFile is used to read a given file and return its data as a string.
-fn ReadFile(filename: String) -> Result<String, std::io::Error> {
-    fs::read_to_string(filename)
+fn ReadFile(filename: &str) -> Result<String> {
+    Ok(fs::read_to_string(filename)?)
 }
 
 // WriteFile is used to write data into a given file.
-fn WriteFile(filename: &str, data: &str) -> Result<(), std::io::Error> {
-    fs::write(filename, data)
+fn WriteFile(filename: &str, data: &str) -> Result<()> {
+    Ok(fs::write(filename, data)?)
 }
 
 // B64D decodes a given string encoded in Base64.
@@ -183,3 +206,4 @@ fn CopyFile(src: &str, dst: &str) -> std::io::Result<()> {
 }
 
 fn main() {}
+
