@@ -75,10 +75,10 @@ fn RandomInt(min: u32, max: u32) -> u32 {
 }
 
 // RandomSelectStr returns a string that was randomly selected from a list of elements of vector.
-fn RandomSelectStr(list: Vec<String>) -> String {
+fn RandomSelectStr(list: Vec<&str>) -> String {
     let mut rng = rand::thread_rng();
     let n = rng.gen_range(0..list.len());
-    list[n].clone()
+    list[n].to_string()
 }
 
 // RandomSelectInt returns an integer that was randomly selected from a list of vector of integers.
