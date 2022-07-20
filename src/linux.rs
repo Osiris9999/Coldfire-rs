@@ -2,10 +2,10 @@ use std::convert::TryInto;
 use std::fs::read_dir;
 use std::process::Command;
 
-fn killProcByPID(pid: u32) -> String {
+fn kill_proc_by_pid(pid: u32) -> String {
     let p = pid.to_string();
     let cmd = "kill -9 ".to_owned() + &p;
-    let (_, err) = cmdOut(&cmd);
+    let (_, err) = cmd_out(&cmd);
     err
 }
 
@@ -16,8 +16,8 @@ fn info() -> String {
     }
 }
 
-fn isRoot() -> bool {
-    let (u, err) = cmdOut("whoami");
+fn is_root() -> bool {
+    let (u, err) = cmd_out("whoami");
     if u == "root" {
         true
     } else {
@@ -25,7 +25,7 @@ fn isRoot() -> bool {
     }
 }
 
-fn cmdOut(command: &str) -> (String, String) {
+fn cmd_out(command: &str) -> (String, String) {
     let output = Command::new("bash")
         .arg("-c")
         .arg(command)
@@ -36,12 +36,12 @@ fn cmdOut(command: &str) -> (String, String) {
     (out, err)
 }
 
-fn sandboxFilepath() -> bool {
-    let (out, err) = cmdOut("systemd-detect-virt");
+fn sandbox_filepath() -> bool {
+    let (out, err) = cmd_out("systemd-detect-virt");
     out != "none"
 }
 
-fn sandboxTmp(entries: u32) -> bool {
+fn sandbox_tmp(entries: u32) -> bool {
     let files = read_dir("/tmp");
     let s = match files {
         Ok(x) => x,
@@ -55,7 +55,7 @@ fn sandboxTmp(entries: u32) -> bool {
 
 fn shutdown() -> String {
     let c = "shutdown +1";
-    let (out, err) = cmdOut(c);
+    let (out, err) = cmd_out(c);
     err
 }
 
