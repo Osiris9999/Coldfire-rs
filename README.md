@@ -1,6 +1,6 @@
 <p align="center">
 <a>
-  <img src="logo.png" width="400">
+  <img src="logo.png">
   </a>
   </p>
  <h4 align="center">Advanced Malware Development Suite</h4>
