@@ -1,6 +1,6 @@
 <p align="center">
 <a>
-  <img src="logo.gif" width="400">
+  <img src="logo.png">
   </a>
   </p>
  <h4 align="center">Advanced Malware Development Suite</h4>
@@ -25,3 +25,5 @@
 
 
 # License
+
+This project is licensed under [GPL-3.0](https://raw.githubusercontent.com/Illumina/licenses/master/gpl-3.0.txt). 
