@@ -23,6 +23,7 @@
   
 # Credits
 
+A lot of thanks to [hridyansh](https://github.com/acnologia000) for helping me out with this project.
 
 # License
 
